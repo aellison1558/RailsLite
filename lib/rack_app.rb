@@ -8,7 +8,7 @@ app = Proc.new do |env|
 
   res['content-type'] = 'text/html'
   res.write(req.url)
-  debugger
+  # debugger
   res.finish
 end
 
