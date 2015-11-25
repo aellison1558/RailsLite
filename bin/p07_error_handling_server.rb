@@ -3,7 +3,6 @@ require_relative '../lib/controller_base'
 require_relative '../lib/router'
 require_relative '../lib/exception_handler'
 
-
 $cats = [
   { id: 1, name: "Curie" },
   { id: 2, name: "Markov" }
@@ -25,15 +24,16 @@ class StatusesController < ControllerBase
   end
 end
 
-class Cats2Controller < ControllerBase
+class CatsController < ControllerBase
   def index
-    render_content($cats.to_s, "text/text")
+    puts a
+    render("index")
   end
 end
 
 router = Router.new
 router.draw do
-  get Regexp.new("^/cats$"), Cats2Controller, :index
+  get Regexp.new("^/cats$"), CatsController, :index
   get Regexp.new("^/cats/(?<cat_id>\\d+)/statuses$"), StatusesController, :index
 end
 
