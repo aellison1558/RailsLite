@@ -50,6 +50,12 @@ class ControllerBase
     render_content(erb_template.result(binding), 'text/html')
   end
 
+  def render_shared(template_name)
+    file = File.read("views/shared/#{template_name}.html.erb")
+    erb_template = ERB.new(file)
+    render_content(erb_template.result(binding), 'text/html')
+  end
+
   # method exposing a `Session` object
   def session
     @session ||= Session.new(@req)
