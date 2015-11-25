@@ -9,9 +9,10 @@ class Flash
   end
 
   def [](key)
+    key_sym = key.to_s
     result = []
     result << @flash_now_hash[key] if @flash_now_hash[key]
-    result << @current_flash[key] if @current_flash[key]
+    result << @current_flash[key_sym] if @current_flash[key_sym]
     if result.length <= 0
       nil
     elsif result.length == 1
