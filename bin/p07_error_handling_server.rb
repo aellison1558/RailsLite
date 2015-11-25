@@ -5,7 +5,7 @@ require_relative '../lib/exception_handler'
 
 
 $cats = [
-  { id: 1, },
+  { id: 1, name: "Curie" },
   { id: 2, name: "Markov" }
 ]
 
