@@ -63,8 +63,7 @@ class Router
     if route
       route.run(req, res)
     else
-      res.status = 404
-      res.write("No routes matched request")
+      raise "No routes matched request"
     end
   end
 end

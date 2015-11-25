@@ -11,7 +11,7 @@ class ExceptionHandler
     req = Rack::Request.new(env)
     res = Rack::Response.new
     begin
-      @app.call
+      @app.call(env)
     rescue => exception
       print "Rescued!"
       params = {exception: exception}
