@@ -2,6 +2,7 @@ require 'rack'
 require_relative '../lib/controller_base'
 require_relative '../lib/router'
 require_relative '../lib/static_assets'
+require_relative '../lib/exception_handler'
 
 
 $cats = [
@@ -46,6 +47,7 @@ my_app = Proc.new do |env|
 end
 
 app = Rack::Builder.new do
+  use ExceptionHandler
   use StaticAssets
   run my_app
 end.to_app
