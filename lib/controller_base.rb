@@ -3,6 +3,7 @@ require 'active_support/core_ext'
 require 'erb'
 require_relative './session'
 require_relative './flash'
+require 'byebug'
 
 class ControllerBase
   attr_reader :req, :res, :params
@@ -12,6 +13,7 @@ class ControllerBase
     @req = req
     @res = res
     @params = req.params.merge(route_params)
+    @auth_token = flash["authenticity_token"] || SecureRandom.urlsafe_base64
   end
 
   # Helper method to alias @already_built_response
@@ -21,6 +23,7 @@ class ControllerBase
 
   # Set the response status code and header
   def redirect_to(url)
+    raise InvalidAuthenticityToken unless verify_authenticity?
     raise "Cannot render twice!" if already_built_response?
     @res.status = 302
     @res['location'] = url
@@ -33,6 +36,7 @@ class ControllerBase
   # Set the response's content type to the given type.
   # Raise an error if the developer tries to double render.
   def render_content(content, content_type)
+    raise InvalidAuthenticityToken unless verify_authenticity?
     raise "Cannot render twice!" if already_built_response?
     @res.write(content)
     @res['content-type'] = content_type
@@ -44,6 +48,7 @@ class ControllerBase
   # use ERB and binding to evaluate templates
   # pass the rendered html to render_content
   def render(template_name)
+    raise InvalidAuthenticityToken unless verify_authenticity?
     controller_name = self.class.name.underscore
     file = File.read("views/#{controller_name}/#{template_name}.html.erb")
     erb_template = ERB.new(file)
@@ -65,4 +70,18 @@ class ControllerBase
     self.send(name)
     render(name) unless already_built_response?
   end
+
+  def form_authenticity_token
+    flash['authenticity_token'] = @auth_token
+    @auth_token
+  end
+
+  def verify_authenticity?
+    return true if @req.request_method == "GET"
+    flash["authenticity_token"] == @auth_token
+    # debugger
+  end
+end
+
+class InvalidAuthenticityToken < StandardError
 end
