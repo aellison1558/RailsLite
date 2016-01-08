@@ -1,11 +1,8 @@
 require_relative 'db_connection'
 require 'active_support/inflector'
 require 'active_support/inflector'
-require 'byebug'
-# NB: the attr_accessor we wrote in phase 0 is NOT used in the rest
-# of this project. It was only a warm up.
 
-# Phase IIIa
+
 class AssocOptions
   attr_accessor(
     :foreign_key,
@@ -38,12 +35,10 @@ class HasManyOptions < AssocOptions
     @class_name = options[:class_name] || name.to_s.singularize.camelcase
     @foreign_key = options[:foreign_key] || "#{self_class_name.to_s.downcase}_id".to_sym
     @primary_key = options[:primary_key] || :id
-    # ...
   end
 end
 
 module Associatable
-  # Phase IIIb
   def belongs_to(name, options = {})
     belongs_options = BelongsToOptions.new(name, options)
     assoc_options[name] = belongs_options
@@ -163,16 +158,6 @@ class SQLObject
     parse_all(rows)
   end
 
-  # def self.variables(attributes)
-  #   #parses query results to make
-  #   #column names into symbols
-  #   variables = {}
-  #   attributes.each do |key, value|
-  #     variables[key.to_sym] = value
-  #   end
-  #   variables
-  # end
-
   def self.parse_all(results)
     objects = []
     results.each do |attrs|
@@ -195,7 +180,6 @@ class SQLObject
   end
 
   def initialize(params = {})
-    # debugger
     params.each do |key, value|
       sym = key.to_sym
       raise "unknown attribute '#{sym}'" unless self.class.columns.include?(sym)
@@ -290,10 +274,3 @@ class SQLObject
     parse_all(rows)
   end
 end
-
-
-
-# load 'lib/01_sql_object.rb'
-# class Cat < SQLObject
-#   self.finalize!
-# end

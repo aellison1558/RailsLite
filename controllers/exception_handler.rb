@@ -1,5 +1,5 @@
 require_relative 'controller_base'
-require 'byebug'
+
 class ExceptionHandler
   attr_reader :app
 

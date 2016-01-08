@@ -1,5 +1,4 @@
 require 'rack'
-require 'byebug'
 
 app = Proc.new do |env|
   req = Rack::Request.new(env)
@@ -8,7 +7,6 @@ app = Proc.new do |env|
 
   res['content-type'] = 'text/html'
   res.write(req.url)
-  # debugger
   res.finish
 end
 
