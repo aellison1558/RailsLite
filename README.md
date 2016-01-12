@@ -9,11 +9,11 @@ To use:
 
 -Create appropriate models, controllers, and views in provided folders
 
-  -models must have require_relative('./active_record_base') at top
+  -Models must have require_relative('./active_record_base') at top
 
-  -controllers must have require_relative('./controller_base') and must also require the associated model
+  -Controllers must have require_relative('./controller_base') and must also require the associated model
 
-  -views must be placed in a folder within views named after their controller, ex: "examples_controller"
+  -Views must be placed in a folder within views named after their controller, ex: "examples_controller"
 
 -Write routes in app.rb within router.draw block
 
