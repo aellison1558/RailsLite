@@ -5,6 +5,7 @@ Comes with my ActiveRecordLite, which builds model classes connected to tables i
 Example Project: https://github.com/aellison1558/RailsLiteTODOApp
 
 To use:
+
 -Fill in SQL file (sql_file.sql) with desired tables.
 
 -Create appropriate models, controllers, and views in provided folders
