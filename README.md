@@ -1,4 +1,6 @@
-# A Web server MVC framework inspired by the functionality of Ruby on Rails
+# RailsLite with ActiveRecordLite
+
+A Web server MVC framework inspired by the functionality of Ruby on Rails
 
 Comes with my ActiveRecordLite, which builds model classes connected to tables in a relational database.
 
