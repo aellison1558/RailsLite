@@ -2,7 +2,8 @@
 
 Comes with my ActiveRecordLite, which builds model classes connected to tables in a relational database.
 
-[Example Project]: https://github.com/aellison1558/RailsLiteTODOApp
+[Example Project][example]
+[example]: https://github.com/aellison1558/RailsLiteTODOApp
 
 To use:
 
